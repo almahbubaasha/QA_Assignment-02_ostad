@@ -1,1 +1,1 @@
-{"byId":{"39d8e336a99a4db94d4f7b8b8acdfc5a":{"id":"39d8e336a99a4db94d4f7b8b8acdfc5a","name":"Q1 - Invalid Login","duration":7816,"status":"passed","environment":"default"}}}
+{"byId":{"dd1df4e63100dfbb8a28ccdca23989bb":{"id":"dd1df4e63100dfbb8a28ccdca23989bb","name":"Q2 - Register, login and add product to cart","duration":17068,"status":"passed","environment":"default"},"2cf933b66daee526c9719bd9c3f3f8a3":{"id":"2cf933b66daee526c9719bd9c3f3f8a3","name":"Q1 - Invalid Login","duration":3463,"status":"passed","environment":"default"}}}
