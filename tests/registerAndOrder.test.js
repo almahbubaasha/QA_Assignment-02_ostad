@@ -9,7 +9,7 @@ test('Q2 - Register, login and add product to cart', async ({page}, testInfo) =>
     const login = new LoginPage(page);
     const orders = new OrderPage(page);
 
-    // protibar notun/unique email, tai "already exists" error asbe na
+    // for unique email each time
     const timestamp = Date.now();
     const email = `ashatest${timestamp}@gmail.com`;
     const password = 'asha@456';
@@ -27,7 +27,7 @@ test('Q2 - Register, login and add product to cart', async ({page}, testInfo) =>
 
     await page.waitForTimeout(3000);
 
-    //register korle auto login hoye jay, tai logout kore abar login korchi
+    //first logout then login with the same credentials
     await pages.logout();
 
     //login
@@ -48,7 +48,7 @@ test('Q2 - Register, login and add product to cart', async ({page}, testInfo) =>
 
     await orders.shCart.click();
 
-    //verify product o quantity thik ase kina
+    //check product name and quantity in cart
     const cartProductName = await orders.getCartProductName();
     const cartQty = await orders.getCartProductQty();
 
