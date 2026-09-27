@@ -1,3 +1,39 @@
+# QA Assignment 02 — Playwright Automation
+
+## Project Overview
+
+This project contains automated end-to-end test scenarios for the [Tricentis Demo Web Shop](https://demowebshop.tricentis.com/), built using Playwright with the Page Object Model (POM) design pattern. Each scenario is implemented as an independent, runnable test, and all scenarios can also be executed together as a full suite.
+
+## Tech Stack
+
+- **Language:** JavaScript
+- **Test Framework:** Playwright Test
+- **Design Pattern:** Page Object Model (POM)
+- **Reporting:** Playwright HTML Reporter + Allure Report
+- **Runtime:** Node.js
+
+## Test Scenarios
+
+- **Q1 - Invalid Login:** Attempts login with an invalid email/password combination, verifies an error message is displayed and the user is not logged in.
+- **Q2 - Register + Add Product to Cart:** Registers a new customer with a unique email, logs in, navigates to the Books category, selects a product, adds it to the cart, and verifies the correct product and quantity appear in the cart.
+- **Q3 - Search, Checkout and Confirm Order:** Registers a new customer, logs in, searches for a product, adds it to the cart with a specific quantity, completes the full checkout flow (billing address, in-store pickup, payment method, payment information, order confirmation), verifies the order is successfully processed, and attaches an order confirmation screenshot to the report.
+
+## Project Structure
+assignment-02/
+├── pages/ # Page Object Model classes
+│ ├── BasePage.js
+│ ├── Register.js
+│ ├── LoginPage.js
+│ ├── SearchPage.js
+│ ├── OrderPage.js
+│ └── CheckoutPage.js
+├── tests/ # Test scenarios
+│ ├── invalidLogin.test.js (Q1)
+│ ├── registerAndOrder.test.js (Q2)
+│ └── searchAndCheckout.test.js (Q3)
+├── playwright.config.js
+├── package.json
+└── README.md
 
 ## Setup Instructions
 
