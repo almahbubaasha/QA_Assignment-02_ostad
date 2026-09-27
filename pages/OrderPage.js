@@ -19,6 +19,9 @@ class OrderPage extends BasePage {
         this.productNameOnDetailPage = page.locator('.product-name h1');
         this.cartProductName = page.locator('.cart .product a');
         this.cartProductQty = page.locator('.cart .qty input');
+        //quantity baranor jonno
+        this.quantityInput = page.locator("//input[@id='addtocart_13_EnteredQuantity']");
+        
  }
   async clickMenuBooks() {
     await this.menuBooks.click();
@@ -55,6 +58,12 @@ class OrderPage extends BasePage {
   async getCartProductQty(){
     return await this.cartProductQty.first().inputValue();
   }
+
+  async increaseQuantity(qty){
+    await this.quantityInput.fill(qty.toString());
+}
+
+
 
 }
 
