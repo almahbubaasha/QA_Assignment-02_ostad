@@ -32,6 +32,23 @@ This project contains automated end-to-end test scenarios for the [Tricentis Dem
 > from the original resource. Including `phone` ensures the "Phone should not be empty" 
 > assertion validates against the actual response.
 
+
+### Generating an HTML Report for API Tests
+
+Install the Newman HTML reporter (one-time setup):
+
+\`\`\`bash
+npm install -g newman-reporter-htmlextra
+\`\`\`
+
+Run the collection with the HTML reporter:
+
+\`\`\`bash
+newman run api-tests/API-Assignment-02.postman_collection.json -e api-tests/api-env.postman_environment.json -r htmlextra --reporter-htmlextra-export reports/api-report.html
+\`\`\`
+
+This generates a detailed HTML report at `reports/api-report.html`, including request/response details and pass/fail status for each assertion.
+
 ## Project Structure
 
 ```
