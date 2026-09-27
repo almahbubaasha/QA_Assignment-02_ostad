@@ -1,0 +1,110 @@
+{
+  "info": {
+    "_postman_id": "ac0122da-cdaf-451e-a774-c8f27974722c",
+    "name": "API-Assignment-02",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56300148",
+    "_collection_link": "https://go.postman.co/collection/56300148-ac0122da-cdaf-451e-a774-c8f27974722c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "get all users",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "console.log(\"this is pre request for get all users\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "console.log(\"this is get all users request\");\r\n\r\n\r\n//step-1\r\n\r\npm.test(\"Response should be ok and the status code is 200\", function(){\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response should not have a body\",function(){\r\n    pm.response.to.not.have.body(\"error\");\r\n});\r\n\r\nconst res = pm.response.json();\r\nconsole.log(`this is actual result in json ${res}`);\r\n\r\npm.test(\"Response should be a non-empty array\", function(){\r\n    pm.expect(res).to.be.an('array');\r\n    pm.expect(res.length).to.be.above(0);\r\n});\r\n\r\npm.test(\"Response should contain user information\", function(){\r\n    pm.expect(res[0]).to.have.property('id');\r\n    pm.expect(res[0]).to.have.property('name');\r\n    pm.expect(res[0]).to.have.property('email');\r\n});\r\n\r\npm.test(\"Each user should have id, name and email\", function(){\r\n    res.forEach(function(user){\r\n        pm.expect(user).to.have.property('id');\r\n        pm.expect(user).to.have.property('name');\r\n        pm.expect(user).to.have.property('email');\r\n    });\r\n});\r\n\r\n\r\n//step-2\r\n\r\npm.environment.set('userId', res[0].id);\r\npm.environment.set('userName', res[0].name);\r\nconsole.log(\"saved userId is \" + res[0].id);\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/users",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update user",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "console.log(\"this is pre request for update user\");\r\n\r\nconst oldName = pm.environment.get(\"userName\");\r\nconst nName = `${oldName} Updated ${Date.now()}`;\r\npm.environment.set(\"newName\", nName);\r\n\r\nconst nEmail = `user${Date.now()}@example.com`;\r\npm.environment.set(\"newEmail\", nEmail);\r\n\r\nconst nCompany = `Company Updated ${Date.now()}`;\r\npm.environment.set(\"newCompany\", nCompany);"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "console.log(\"this is update user request\");\r\n\r\nconst resp = pm.response.json();\r\nconsole.log(resp);\r\n\r\npm.test(\"Status code is 200\", function(){\r\n    pm.expect(pm.response.code).to.eql(200);\r\n});\r\n\r\npm.test(\"response should not be empty\", function(){\r\n    pm.expect(resp).to.not.be.empty;\r\n});\r\n\r\npm.test(\"Returned ID should match saved ID\", function(){\r\n    const savedId = pm.environment.get('userId');\r\n    pm.expect(resp.id).to.eql(Number(savedId));\r\n});\r\n\r\npm.test(\"Phone should not be empty\", function(){\r\n    pm.expect(resp.phone).to.not.be.empty;\r\n});\r\n\r\npm.test(\"Returned name should match updated name\", function(){\r\n    const expectedName = pm.environment.get('newName');\r\n    pm.expect(resp.name).to.eql(expectedName);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": {{userId}},\r\n    \"name\": \"{{newName}}\",\r\n    \"email\": \"{{newEmail}}\",\r\n    \"phone\": \"01700000000\",\r\n    \"company\": {\r\n        \"name\": \"{{newCompany}}\"\r\n    }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/users/{{userId}}",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "users",
+            "{{userId}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

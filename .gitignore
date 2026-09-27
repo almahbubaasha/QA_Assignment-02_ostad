@@ -10,5 +10,9 @@ node_modules/
 /allure-results/
 /allure-report/
 
+# Newman (API test reports)
+/newman/
+/reports/
+
 # Environment
 .env
