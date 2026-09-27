@@ -26,6 +26,12 @@ This project contains automated end-to-end test scenarios for the [Tricentis Dem
 - **Get All Users:** Sends a `GET` request to `https://jsonplaceholder.typicode.com/users`, verifies the response status is 200, confirms the response is a non-empty array, and checks that each user object contains `id`, `name`, and `email`. Saves a `userId` from the response for use in the next request.
 - **Update User:** Sends a `PUT` request to `https://jsonplaceholder.typicode.com/users/{{userId}}` with an updated name, email, phone, and company name. Verifies the response status is 200, the response body is not empty, the returned `id` matches the saved `userId`, the `phone` field is present, and the returned `name` matches the updated name sent in the request.
 
+> **Note:** The PUT request body also includes `phone` in addition to `name`, `email`, 
+> and `company.name`. This is because JSONPlaceholder is a mock API that only echoes 
+> back the fields sent in the request — it does not persist or return unmodified fields 
+> from the original resource. Including `phone` ensures the "Phone should not be empty" 
+> assertion validates against the actual response.
+
 ## Project Structure
 
 ```
